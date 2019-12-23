@@ -1,0 +1,104 @@
+{include file="common/head"}
+
+
+
+
+		<!-- content satrt -->
+		<div class="main" style="margin-top: 80px;">
+			<form action="{:url('user/withdraw/add_withdraw')}" method="post">
+			
+				<div class="user-wrap">
+					<div class="user-info" >
+
+						<div class="info-title">收款姓名</div>
+						<div class="info-input"><input type="text"  name="name" value="" class="form-control"  placeholder="请输入你的真实姓名"></div>
+					</div>
+
+					<div class="user-info">
+						<div class="info-title">所属银行</div>
+						<div class="info-input"><input type="text" value="" name="withdrawal_type" class="form-control"  placeholder="请输入银行卡所属行"></div>
+					</div>
+
+					<div class="user-info">
+						<div class="info-title">银行卡号</div>
+						<div class="info-input"><input type="text" value="" name="id_num" class="form-control"  placeholder="输入银行卡号"></div>
+					</div>
+
+					<div class="user-info" >
+						<div class="info-title">开户地址</div>
+						<div class="info-input"><input type="text"  value="" name="bank_name" class="form-control"  placeholder="输入开户行（如成都市城南支行）"></div>
+					</div>
+					<div class="user-info" >
+						<div class="info-title">提现金额</div>
+						<div class="info-input"><input type="text"  value="" name="w_amount" class="form-control"  placeholder="需大于50元"></div>
+					</div>
+
+
+<!-- 					<div class="user-info">
+						<div class="info-title">验证码</div>
+						<div class="info-code"><input type="text" name="code" class="form-control"  placeholder="请输入验证码"></div>
+						<div class="info-code">
+							<button id="btn-sendCode" class="button">获取验证码</button>
+						</div>
+					</div> -->
+
+					<input type="hidden" class="token" name="__token__" value="{$Request.token}" />
+					<div class="row">
+						<div class="col-md-12" style="text-align: center;margin: 50px auto;">
+							<button type="submit"  class="btn btn-primar commission"> 提 交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<!-- 	<button type="reset" class="btn btn-warning"> 重 置</button> -->
+						</div>
+					</div>
+					</form>
+				</div>
+			
+		</div>
+		<!-- content end -->
+
+	</div>
+
+	<script src="/public/static/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+	<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/public/static/assets/scripts/klorofil-common.js"></script>
+	<script src="/public/static/assets/vendor/js/main.js"></script>
+<!-- <script>
+	$(function(){
+
+		$('.commission').click(function(){
+			var username = $('#username').val();
+			var type = $('.select2').val();
+			var tel = $('#phone').val();
+			var commission = $('#commission').val();
+			var password = $('#password').val();
+
+
+
+			$.post('{:url("user/sales/add_sales")}',{username:username,type:type,tel:tel,commission:commission,password:password},function(data){
+
+				if(data.code == '0000'){
+					alert(data.msg);
+					window.location.href='{:url("user/sales/index")}';
+				}else{
+
+					alert(data.msg);
+				}
+
+
+
+
+			})
+
+		})
+		
+
+
+
+
+	})
+</script> -->
+</body>
+
+</html>

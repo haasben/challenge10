@@ -1,0 +1,99 @@
+{include file="common/head"}
+
+
+
+		<!-- content satrt -->
+		<div class="main" style="margin-top: 80px;">
+
+			<form role="form" action="" method="">
+				<div class="user-wrap">
+					<div class="user-info" >
+						<div class="info-title">用户名</div>
+						<div class="info-input"><input type="text" name="name" class="form-control"  placeholder="请输入用户名"></div>
+					</div>
+					<div class="user-info" >
+						<div class="info-title">账户号</div>
+						<div class="info-input"><input type="text" name="number" class="form-control"  placeholder="请输入账户号"></div>
+					</div>
+					<div class="user-info">
+						<div class="info-title">代理级别</div>
+						<div class="info-input select">
+							<select name="" class="select2 form-control" style="width: 100%;">
+								<option value="">请选择</option>
+								<option value="">1级</option>
+								<option value="">2级</option>
+								<option value="">3级</option>
+								<option value="">4级</option>
+								<option value="">5级</option>
+								<option value="">6级</option>
+								<option value="">7级</option>
+								<option value="">8级</option>
+								<option value="">9级</option>
+								<option value="">10级</option>
+							</select>
+						</div>
+					</div>
+					<div class="user-info">
+						<div class="info-title">手机号</div>
+						<div class="info-input"><input type="text" name="phone" id="phone" class="form-control"  placeholder="请输入手机号"></div>
+					</div>
+					<div class="user-info">
+						<div class="info-title">验证码</div>
+						<div class="info-code"><input type="text" name="code" class="form-control"  placeholder="请输入验证码"></div>
+						<div class="info-code">
+							<button id="btn-sendCode" class="button">获取验证码</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" style="text-align: center;margin: 50px auto;">
+							<button type="submit" class="btn btn-primary"> 提 交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="reset" class="btn btn-warning"> 重 置</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- content end -->
+
+	</div>
+
+	<script src="/public/static/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+	<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/public/static/assets/scripts/klorofil-common.js"></script>
+	<script src="/public/static/assets/vendor/js/main.js"></script>
+<script>
+	$(function () {
+        $('#btn-sendCode').on('click', function () {
+            var phone = $('#phone').val();
+            if($('#phone').val() !=""){
+                //开始倒计时
+                var countdown=60;
+
+                var smsInterval = setInterval(function (args) {
+                    if (countdown == 0) {
+                        $this.text('获取验证码').removeAttr("disabled");
+                        countdown = 60;
+                        window.clearInterval(smsInterval);//停止计时器
+                    } else {
+                        $this.text('重新发送('+countdown+'秒)').attr('disabled','disabled')
+                        countdown--;
+                    }
+                },1000);
+
+                var $this = $(this);
+
+                $.post('',{phone:phone},function (data) {
+
+                });
+            }else{
+                alert("请先输入手机号！")
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

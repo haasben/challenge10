@@ -1,0 +1,113 @@
+{include file="common/head"}
+
+
+		<!-- content satrt -->
+		<div class="main" style="margin-top: 80px;">
+
+			
+				<div class="user-wrap">
+					<div class="user-info" >
+						<input type="hidden" name="uid">
+						<div class="info-title">用户姓名</div>
+						<div class="info-input"><input type="text" id="username" name="username" value="" class="form-control"  placeholder="请输入用户名"></div>
+					</div>
+
+					   <div class="user-info" >
+						<div class="info-title">真实姓名</div>
+						<div class="info-input"><input type="text" id="realname" value="" name="realname" class="form-control"  placeholder="请输入真实姓名"></div>
+					</div>
+
+
+					<div class="user-info">
+						<div class="info-title">代理级别</div>
+						<div class="info-input select">
+							<select name="type" class="select2 form-control" style="width: 100%;">
+								<option value="1">普通玩家</option>
+								<option value="2" selected="selected">业务员</option>
+								<option value="3">个人代理</option>
+								<option value="4">企业代理</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="user-info">
+						<div class="info-title">手机号吗</div>
+						<div class="info-input"><input type="text" value="" name="tel" id="phone" class="form-control"  placeholder="请输入手机号"></div>
+					</div>
+
+					<div class="user-info">
+						<div class="info-title">账户密码</div>
+						<div class="info-input"><input type="text" value="" name="password" id="password" class="form-control"  placeholder="输入用户登陆密码"></div>
+					</div>
+
+					<div class="user-info" >
+						<div class="info-title">返佣比例</div>
+						<div class="info-input"><input type="text" id="commission" value="" name="commission" class="form-control"  placeholder="如0.5"></div>
+					</div>
+
+<!-- 					<div class="user-info">
+						<div class="info-title">验证码</div>
+						<div class="info-code"><input type="text" name="code" class="form-control"  placeholder="请输入验证码"></div>
+						<div class="info-code">
+							<button id="btn-sendCode" class="button">获取验证码</button>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="col-md-12" style="text-align: center;margin: 50px auto;">
+							<button type="submit"  class="btn btn-primar commission"> 提 交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<!-- 	<button type="reset" class="btn btn-warning"> 重 置</button> -->
+						</div>
+					</div>
+				</div>
+			
+		</div>
+		<!-- content end -->
+
+	</div>
+
+	<script src="/public/static/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+	<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/public/static/assets/scripts/klorofil-common.js"></script>
+	<script src="/public/static/assets/vendor/js/main.js"></script>
+<script>
+	$(function(){
+
+		$('.commission').click(function(){
+			var username = $('#username').val();
+			var type = $('.select2').val();
+			var tel = $('#phone').val();
+			var commission = $('#commission').val();
+			var password = $('#password').val();
+			var realname = $('#realname').val();
+
+
+
+			$.post('{:url("user/sales/add_sales")}',{username:username,type:type,tel:tel,commission:commission,password:password,realname:realname},function(data){
+
+				if(data.code == '0000'){
+					alert(data.msg);
+					window.location.href='{:url("user/sales/index")}';
+				}else{
+
+					alert(data.msg);
+				}
+
+
+
+
+			})
+
+		})
+		
+
+
+
+
+	})
+</script>
+</body>
+
+</html>

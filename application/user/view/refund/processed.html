@@ -1,0 +1,152 @@
+{include file="common/head"}
+
+
+<!-- content satrt -->
+    <div class="main" style="margin-top: 30px;">
+
+        <form action="{:url('user/refund/processed')}" method="get">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered form-table">
+                            <tbody>
+                            <tr>
+                                <td class="search-data" width="10%">账户ID</td>
+                                <td><input  type="text" name="uid" value="{$value.uid}" class="form-control"></td>
+                                    <td class="search-data" width="10%">姓名</td>
+                                    <td><input type="text"  name="username" value="{$value.username}" class="form-control"/></td>
+                                    <td class="search-data" width="10%">支付宝账号</td>
+                                    <td><input type="text" value="{$value.tel}" name="tel" class="form-control"/></td>
+                                <td class="search-data" width="10%">时间段</td>
+                                    <td>
+                                        <div class="clearfix-date">
+                                            <div class="select-time"><input class="form-control" name="begin_time" value="{$value.begin_time}" placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readonly:true})" style="width: 95%;"></div>
+                                            <div class="select-time-to">至</div>
+                                            <div class="select-time"><input class="form-control" name="end_time" value="{$value.end_time}" placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readonly:true})" style="width: 95%;"></div>
+                                        </div>
+                                    </td>
+
+
+                            </tr>
+                            <tr>
+                                <td colspan="8" align="center">
+                                    <button type="submit" class="btn btn-primary">筛 选</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-warning">重 置</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row margin-left clearfix-date">
+                <div class="table-title-wrap title-des">会员退款申请</div>
+                <div class="title-total">已退款总金额：<span class="title-count">{$sum_money/100}</span>元</div></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-hover table-spacing" style="margin-top: 20px;">
+                    <thead>
+                    <tr class="table-title">
+                        <td>账户ID</td>
+                        <td>退款数量及金额</td>
+                        <td>会员档次</td>
+                        <td>充值方式</td>
+                        <td>申请提现</td>
+                      	<td>处理时间</td>
+                        <td>处理状态</td>
+                        <td>提现至(支付宝)</td>
+<!--                         <td>操作</td> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                {volist name="$processed_data" id='v'}
+                    <tr class="table-data">
+                        <td>{$v.uid}({$v.username})</td>
+                        <td>{$v.duration}（{$v.money/100}元）</td>
+                        <td>{switch name="$v.member_type"}
+                        {case value="2"}钻石会员{/case}
+                        {case value="3"}皇冠会员{/case}
+                        {default /}普通会员
+                    {/switch} </td>
+                        <td>金币充值</td>
+                        <td>{$v.addtime|date="Y-m-d H:i:s",###} 申请提现</td>
+                      	<td>{$v.process_time|date="Y-m-d H:i:s",###}</td>
+                      	<td>{switch name="$v.status"}
+                        {case value="1"}<span style="color:red">已打款</span>{/case}
+                        {default /}已驳回
+                    {/switch}</td>
+                        <td>提现账号：{$v.alipay}</td>
+<!--                         <td>
+                            <a href="#" class="a-underline agree" value="{$v.id}">确认已打款</a>&nbsp;
+                            <a href="#" class="a-underline rebut" value="{$v.id}">
+                                驳回
+                            </a>&nbsp;
+                        </td> -->
+                    </tr>
+                {/volist}
+
+                    </tbody>
+                </table>
+                {$processed_data->render()}
+            </div>
+
+        <!--同意确认 satrt-->
+        <div class="modal fade" id="confirm-agree">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 400px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" style="text-align:center;">操作确认</h4>
+                    </div>
+                    <div class="modal-body adjust-box">
+                        <div class="config-des config">确认同意账户ID为<span class="yellow user_name">8888</span>的退款申请</div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button type="button" class="btn btn-primary confirm-adjust">确 认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--同意确认 end-->
+
+        <!--驳回操作 start-->
+        <div class="modal fade" id="config-rebut">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 400px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" style="text-align:center;">操作确认</h4>
+                    </div>
+                    <div class="modal-body adjust-box">
+                        <div class="config-des config">确认驳回账户ID为<span class="yellow user_name">8888</span>的退款申请</div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button type="button" class="btn btn-primary confirm-adjust" data-dialog="modal">确 认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--驳回操作 end-->
+
+
+    </div>
+    <!-- content end -->
+</div>
+<!-- wrapper end -->
+</div>
+<!-- Javascript -->
+<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+<script src="/public/static/assets/vendor/My97DatePicker/WdatePicker.js"></script>
+<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/public/static/assets/vendor/js/main.js"></script>
+
+
+
+</body></html>

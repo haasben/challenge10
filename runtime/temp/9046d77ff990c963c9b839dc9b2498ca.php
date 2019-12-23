@@ -1,0 +1,106 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:51:"E:\WWW\game/application/index\view\index\index.html";i:1550455857;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <a href="javascript:void(0);" onclick="click_a()">点我</a>
+
+</body>
+</html>
+<script type="text/javascript" src="/public/static/home/js/jq1.6.min.js"></script>
+<script type="text/javascript">
+/**
+ * 与GatewayWorker建立websocket连接，域名和端口改为你实际的域名端口，
+ * 其中端口为Gateway端口，即start_gateway.php指定的端口。
+ * start_gateway.php 中需要指定websocket协议，像这样
+ * $gateway = new Gateway(websocket://0.0.0.0:7272);
+ */
+//var ws = new WebSocket("ws://"+document.domain+":8282");
+var ws = new WebSocket("ws://47.99.198.85:9502");
+
+ws.onopen = function()
+   {
+      // Web Socket 已连接上，使用 send() 方法发送数据
+      var data = '{"type":"timed_robot","is_open":0,"num_robot":2,"time":5}';
+
+      ws.send(data);
+    
+   };
+
+// 服务端主动推送消息时会触发这里的onmessage
+ws.onmessage = function(e){
+    // json数据转换成js对象
+    var data = JSON.parse(e.data);
+
+    var type = data.type || '';
+    switch(type){
+        case 'ping':
+                
+            break;
+        // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
+        // case 'init':
+        //     // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
+        //     $.post("<?php echo url('push/bind/bind_user'); ?>", {client_id: data.client_id}, function(data){
+        //         console.log('init');
+                
+        //             alert(data.msg);
+
+
+        //     }, 'json');
+        //     break;
+
+        case 'active':
+                var user_data = data.data;
+                $.each(user_data,function(i,item){
+
+            　　　　console.log(item.username,item.avatar,item.uid,item.is_homeowner,data.room_order);
+
+            　　});
+
+            break;
+
+        case 'leave':
+                var user_data = data.data;
+                    if(user_data != null){
+                        $.each(user_data,function(i,item){
+
+                　　　　console.log(item.username,item.avatar,item.uid);
+
+                　　});
+                }
+
+
+
+            break;
+
+        case 'begin_game':
+	
+                console.log(data.msg);
+
+            break;
+
+
+        default :
+        
+            console.log(e.data);
+    }
+};
+
+ws.onclose = function(){
+
+    console.log('链接关闭');
+}
+
+
+function click_a(){
+
+    var data = '{"type":"begin_game","uid":"10012,10000,1"}';
+    ws.send(data);
+}
+
+
+</script>

@@ -1,0 +1,202 @@
+{include file="common/head"}
+
+		<!-- content satrt -->
+		<div class="main" style="margin-top: 80px;">
+			<form action="" method="">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="table-responsive">
+							<table class="table table-bordered form-table">
+								<tbody>
+								<tr>
+									<td class="search-data" width="10%">编号</td>
+									<td><input type="text" class="form-control"/></td>
+									<td class="search-data" width="10%">姓名</td>
+									<td><input type="text" class="form-control"/></td>
+									<td class="search-data" width="10%">联系方式</td>
+									<td><input type="text" class="form-control"/></td>
+									<td class="search-data" width="10%">等级</td>
+									<td>
+										<div class="input-group" style="width: 100%">
+											<select name="" class="select2 form-control">
+												<option value="">请选择</option>
+												<option value="">1级</option>
+												<option value="">2级</option>
+												<option value="">3级</option>
+												<option value="">4级</option>
+												<option value="">5级</option>
+												<option value="">6级</option>
+												<option value="">7级</option>
+												<option value="">8级</option>
+												<option value="">9级</option>
+												<option value="">10级</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="search-data" width="10%">总入金</td>
+									<td>
+										<div class="input-group" style="width: 100%">
+											<select name="" class="select2 form-control">
+												<option value="">请选择</option>
+												<option value="">1-5000元</option>
+												<option value="">5000-10000元</option>
+											</select>
+										</div>
+									</td>
+									<td class="search-data" width="10%">总提成</td>
+									<td>
+										<div class="input-group" style="width: 100%">
+											<select name="" class="select2 form-control">
+												<option value="">请选择</option>
+												<option value="">1-5000元</option>
+												<option value="">5000-10000元</option>
+											</select>
+										</div>
+									</td>
+									<td class="search-data" width="10%">费率筛选</td>
+									<td><input type="text" class="form-control"/></td>
+									<td class="search-data" width="10%">时间段</td>
+									<td>
+										<div class="clearfix-date">
+											<div class="select-time"><input class="form-control" name="" value="" placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readonly:true})" style="width: 95%;"></div>
+											<div class="select-time-to">至</div>
+											<div class="select-time"><input class="form-control" name="" value="" placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readonly:true})" style="width: 95%;"></div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="8" align="center">
+										<button type="button" class="btn btn-primary">筛 选</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="btn btn-warning">取 消</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="row margin-left"><div class="col-sm-12 table-title-wrap">提现申请</div></div>
+			<div class="row">
+				<div class="col-sm-12">
+					<table class="table table-hover table-spacing" style="margin-top: 20px;">
+						<thead>
+						<tr class="table-title">
+							<td>编号</td>
+							<td>账户名</td>
+							<td>联系方式</td>
+							<td>总入金</td>
+							<td>账户余额</td>
+							<td>申请提现</td>
+							<td>提现至</td>
+							<td>操作</td>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="table-data">
+							<td>hyzf_1</td>
+							<td>xxxxxx有限公司</td>
+							<td>15600018901</td>
+							<td>8888888888888</td>
+							<td>8888888888888</td>
+							<td>2018.11.05 18:32:23 申请提现(23333)</td>
+							<td>工商银行 62122600000000000</td>
+							<td>
+								<a href="#" class="a-underline detailed">明细</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="modal fade myModal" tabindex="-1" role="dialog">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title">历史提现记录</h4>
+											</div>
+											<div class="modal-body">
+												<table class="table">
+													<tr>
+														<td width="30%" align="center">2018.11.12 18:12:02</td>
+														<td width="30%" align="center">66666 (元)</td>
+														<td width="30%" align="center" class="untreated">申请中</td>
+													</tr>
+													<tr>
+														<td width="30%" align="center">2018.11.12 18:12:02</td>
+														<td width="30%" align="center">66666 (元)</td>
+														<td width="30%" align="center" class="recharge-green">已完成</td>
+													</tr>
+													<tr>
+														<td width="30%" align="center">2018.11.12 18:12:02</td>
+														<td width="30%" align="center">66666 (元)</td>
+														<td width="30%" align="center" class="recharge-green">已完成</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a href="#" class="a-underline agree">同意</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="#" class="a-underline reject">驳回</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--同意弹层 start-->
+			<div class="modal fade" id="confirm-agree" tabindex="-1" role="dialog" aria-labelledby="myModal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content" style="width: 400px;">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModal" style="text-align:center;">操作确认</h4>
+						</div>
+						<div class="modal-body">
+							<div class="config-des">同意<span class="yellow">HYZF_1</span>用户处理充值或提现操作</div>
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-primary">确 认</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--同意弹层 end-->
+
+			<!-- 驳回弹层 start-->
+			<div class="modal fade reject-reason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content" style="width: 400px;">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">操作确认</h4>
+						</div>
+						<div class="modal-body">
+							<div class="config-des"><textarea name="" placeholder="请输入驳回理由....." class="write-reason"></textarea></div>
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-primary">确 认</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--驳回弹层 end-->
+
+		</div>
+		<!-- content end -->
+
+	</div>
+	<!-- wrapper end -->
+
+	<!-- Javascript -->
+	<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+	<script src="/public/static/assets/vendor/My97DatePicker/WdatePicker.js"></script>
+	<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/public/static/assets/vendor/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+{include file='common/head'}
+
+
+
+
+		<!-- content satrt -->
+		<div class="main" style="margin-top: 30px;">
+			<div class="row margin-left">
+				<div class="col-sm-2" >
+					<div class="index_bg_title">总入金</div>
+					<div class="deposit">
+						<div class="money-wrap"><span class="money">{$top_data.total_recharge.recharge/100}</span>元</div>
+						<div class="title_icon"><img src="/public/static/assets/img/index_icon_1.png"/></div>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="index_bg_title">总提成</div>
+					<div class="deposit">
+						<div class="money-wrap"><span class="money">{:round($top_data.total_recharge.money/100*$top_data.total_recharge.commission*$scale,2)}</span>元</div>
+						<div class="title_icon"><img src="/public/static/assets/img/index_icon_2.png"/></div>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="index_bg_title">总提现</div>
+					<div class="deposit">
+						<div class="money-wrap"><span class="money">{$top_data.total_recharge.withdraw/100}</span>元</div>
+						<div class="title_icon"><img src="/public/static/assets/img/index_icon_3.png"/></div>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="index_bg_title">玩家剩余总金币</div>
+					<div class="deposit">
+						<div class="money-wrap big-gold"><span class="money">{$top_data.gold_num-$rebort_gold}</span>枚</div>
+                      <?php if($admin_data['type'] == 100){?>
+                      <div class="money-wrap small-gold"><span class="money">{$rebort_gold}</span>枚</div>
+                      <?php };?>
+						<div class="title_icon"><img src="/public/static/assets/img/index_icon_4.png"/></div>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="index_bg_title">代理商</div>
+					<div class="deposit">
+						<div class="agent-wrap">
+							<div class="des">企业代理：<a href="#" class="a-underline">{$top_data.business_agent}</a></div>
+							<div class="des">个人代理：<a href="#" class="a-underline">{$top_data.personal_agent}</a></div>
+							<div class="des">业&nbsp;&nbsp;&nbsp;务&nbsp;&nbsp;员：<a href="#" class="a-underline">{$top_data.salesman}</a></div>
+						</div>
+						<div class="title_icon"><img src="/public/static/assets/img/index_icon_5.png"/></div>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-left">
+				<div class="col-sm-6 index-title-wrap">
+					<div class="index-title">
+						<div class="month-data"><img src="/public/static/assets/img/icon_11.png"/> &nbsp;&nbsp;&nbsp;本月数据</div>
+			<!-- 			<div class="all-data"><a href="#">全部数据 ></a></div> -->
+					</div>
+					<div class="month-item">
+						<div class="month-item-1">
+							<div class="money">{$mid_data.today_money/100}</div>
+							<div class="des">当日入金 (元)</div>
+						</div>
+						<div class="month-item-1">
+							<div class="money">{:round($top_data.total_recharge.today_money/100*$top_data.total_recharge.commission*$scale,2)}</div>
+							<div class="des">当日提成 (元)</div>
+						</div>
+						<div class="month-item-1">
+							<div class="money">{$mid_data.today_agent}</div>
+							<div class="des">新增代理商</div>
+						</div>
+						<div class="month-item-1">
+							<div class="money">{$mid_data.today_play}</div>
+							<div class="des">新增玩家 (人)</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 index-title-wrap">
+					<div class="index-title">
+						<div class="month-data"><img src="/public/static/assets/img/icon_13.png"/> &nbsp;&nbsp;&nbsp;提现申请</div>
+					<!-- 	<div class="all-data"><a href="#">未处理</a></div> -->
+					</div>
+					<div class="cash-wrap">
+						{volist name="withdrawal" id="v"}
+						<div class="cash-apply-des">
+							<div class="des">{$v.add_time|date="Y-m-d H:i:s",###}</div>
+							<div class="des">"提交人：{$v.name}"</div>
+							<div class="des">申请提现{$v.w_amount/100}元</div>
+
+							<?php if($v['status'] == 2){?>
+							<div class="des active">未处理
+							<?php }else{?>
+
+									<div class="des">已处理
+									
+
+								<?php };?>
+							</div>
+						</div>
+						{/volist}
+
+						
+					</div>
+				</div>
+			</div>
+			<div class="row margin-left">
+				<div class="col-sm-6 index-title-wrap" style="margin-top: -420px;">
+					<div class="index-title">
+						<div class="month-data"><img src="/public/static/assets/img/icon_9.png"/> &nbsp;&nbsp;&nbsp;历史充值金额 (元 )</div>
+					<!-- 	<div class="all-data"><a href="#">充值记录 ></a></div> -->
+					</div>
+					<div class="laery-seo-box">
+						<div class="larry-seo-stats" id="larry-seo-stats" style="width: 600px;height: 400px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- content end -->
+
+	</div>
+	<script src="/public/static/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/public/static/assets/vendor/toastr/toastr.min.js"></script>
+	<script src="/public/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/public/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/public/static/assets/vendor/js/main.js"></script>
+	<script>
+		$(function () {
+			var myChart = echarts.init(document.getElementById('larry-seo-stats'));
+
+			option = {
+				color: ['#bdcdec'],
+				tooltip : {
+					trigger: 'axis',
+					axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+						type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis : [
+					{
+						type : 'category',
+						data : [
+
+				{volist name="weeks_order" id="vo" }
+						'{$key}', 
+				{/volist}
+						],
+						axisTick: {
+							alignWithLabel: true
+						}
+					}
+				],
+				yAxis : [
+					{
+						type : 'value'
+					}
+				],
+				series : [
+					{
+						name:'金额',
+						type:'bar',
+						barWidth: '60%',
+						data:[
+{volist name="weeks_order" id="vo"}
+            {$vo}, 
+{/volist}
+
+						]
+					}
+				]
+			};
+
+			myChart.setOption(option);
+		})
+	</script>
+</body>
+</html>
